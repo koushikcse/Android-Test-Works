@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "943329261995",
+    "firebase_url": "https://time-21995.firebaseio.com",
+    "project_id": "time-21995",
+    "storage_bucket": "time-21995.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943329261995:android:b2d1c827dcf6bfda",
+        "android_client_info": {
+          "package_name": "com.kusu.time"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "943329261995-dl5o9ema4lbh9j0l7cisljq775l6m70p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5MB4TVgNVQQALf0j8_IQztpKxT9jmVaQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "943329261995-dl5o9ema4lbh9j0l7cisljq775l6m70p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
