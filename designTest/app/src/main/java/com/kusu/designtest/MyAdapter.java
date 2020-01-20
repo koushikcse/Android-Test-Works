@@ -16,9 +16,9 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private Context context;
-    private List<String> datalist;
+    private List<DataModel> datalist;
 
-    public MyAdapter(Context context, List<String> datalist) {
+    public MyAdapter(Context context, List<DataModel> datalist) {
         this.context = context;
         this.datalist = datalist;
     }
@@ -31,7 +31,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.binding.tvtest.setText(datalist.get(i));
+        viewHolder.binding.tvHead.setText(datalist.get(i).getHead());
+        viewHolder.binding.tvDes.setText(datalist.get(i).getDes());
+        viewHolder.binding.tvDate.setText(datalist.get(i).getDate());
     }
 
     @Override
