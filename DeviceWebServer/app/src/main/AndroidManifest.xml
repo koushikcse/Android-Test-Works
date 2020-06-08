@@ -20,8 +20,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".dummy.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <!--                <action android:name="android.intent.action.MAIN" />-->
+                <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
                 <action android:name="android.net.wifi.STATE_CHANGE" />
@@ -30,24 +30,33 @@
 
         <activity android:name=".server.ServerActivity">
             <intent-filter>
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+                <!--                <action android:name="android.intent.action.MAIN" />-->
+                <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".routeServer.ServerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
 
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
                 <action android:name="android.net.wifi.STATE_CHANGE" />
             </intent-filter>
         </activity>
 
-        <service android:name=".server.MyService" />
+        <service android:name=".routeServer.MyService" />
 
-        <!--<receiver
-            android:name=".server.MyReceiver"
+        <receiver
+            android:name=".routeServer.MyReceiver"
             tools:ignore="ExportedReceiver">
             <intent-filter>
                 <action android:name="START_WEB_SERVICE" />
                 <action android:name="STOP_WEB_SERVICE" />
             </intent-filter>
-        </receiver>-->
+        </receiver>
     </application>
 
 </manifest>
