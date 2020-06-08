@@ -1,19 +1,29 @@
-package com.example.myapplication
+package com.example.myapplication.dummy
 
+import android.Manifest
 import android.content.*
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
+import java.io.FileInputStream
 
 
 class MainActivity : AppCompatActivity() {
+    private val STORAGE_CODE = 1
 
     // INSTANCE OF ANDROID WEB SERVER
     private var androidWebServer: AndroidWebServer? = null
@@ -23,26 +33,106 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        checkPermission()
         floatingActionButtonOnOff.setOnClickListener {
-            if (isConnectedInWifi()) {
-                if (!isStarted && startAndroidWebServer()) {
-                    isStarted = true;
-                    textViewMessage.setVisibility(View.VISIBLE);
-                    floatingActionButtonOnOff.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorGreen));
-                    editTextPort.setEnabled(false);
-                } else if (stopAndroidWebServer()) {
-                    isStarted = false;
-                    textViewMessage.setVisibility(View.INVISIBLE);
-                    floatingActionButtonOnOff.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorRed));
-                    editTextPort.setEnabled(true);
-                }
-            } else {
-                Snackbar.make(coordinatorLayout, getString(R.string.wifi_message), Snackbar.LENGTH_LONG).show();
-            }
+            onOff()
         }
         // INIT BROADCAST RECEIVER TO LISTEN NETWORK STATE CHANGED
-        initBroadcastReceiverNetworkStateChanged();
+
+        set_btn.setOnClickListener {
+            name_txt.text =
+                NAME
+        }
+    }
+
+    private fun onOff() {
+        if (isConnectedInWifi()) {
+            if (!isStarted && startAndroidWebServer()) {
+                isStarted = true;
+                textViewMessage.setVisibility(View.VISIBLE);
+                floatingActionButtonOnOff.setBackgroundTintList(
+                    ContextCompat.getColorStateList(
+                        this,
+                        R.color.colorGreen
+                    )
+                );
+                editTextPort.setEnabled(false);
+            } else if (stopAndroidWebServer()) {
+                isStarted = false;
+                textViewMessage.setVisibility(View.INVISIBLE);
+                floatingActionButtonOnOff.setBackgroundTintList(
+                    ContextCompat.getColorStateList(
+                        this,
+                        R.color.colorRed
+                    )
+                );
+                editTextPort.setEnabled(true);
+            }
+        } else {
+            Snackbar.make(
+                coordinatorLayout,
+                getString(R.string.wifi_message),
+                Snackbar.LENGTH_LONG
+            ).show();
+        }
+    }
+
+    private fun checkPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            ) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    STORAGE_CODE
+                )
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+            //we have permission
+            initBroadcastReceiverNetworkStateChanged()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            STORAGE_CODE -> {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    initBroadcastReceiverNetworkStateChanged()
+
+                    val root = Environment.getExternalStorageDirectory()
+                    val fis: FileInputStream? = null
+                    val file = File(root.absolutePath + "/compliance/")
+                    val arrayfile = file.listFiles()
+                    val length = arrayfile?.size
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(this, "No permission", Toast.LENGTH_LONG).show()
+                }
+                return
+            }
+        }
     }
 
     //region Start And Stop AndroidWebServer
@@ -53,7 +143,13 @@ class MainActivity : AppCompatActivity() {
                 if (port == 0) {
                     throw Exception()
                 }
-                androidWebServer = AndroidWebServer(port)
+                val root = Environment.getExternalStorageDirectory().absolutePath
+                androidWebServer =
+                    AndroidWebServer(
+                        port,
+                        this,
+                        File(root)
+                    )
                 androidWebServer!!.start()
                 return true
             } catch (e: Exception) {
@@ -151,7 +247,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun setName(name: String) {
+        Log.d("name to show:", name)
+//        Toast.makeText(this, name, Toast.LENGTH_LONG).show()
+//        name_txt.setText(name)
+        NAME = name
+    }
+
     companion object {
         private const val DEFAULT_PORT = 8080
+        private var NAME = ""
     }
 }
