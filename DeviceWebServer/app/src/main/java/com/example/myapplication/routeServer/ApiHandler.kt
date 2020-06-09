@@ -26,12 +26,9 @@ object ApiHandler {
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
-            context?.let {
-                val intent = Intent("START_WEB_SERVICE")
-                LocalBroadcastManager.getInstance(it).sendBroadcast(intent)
-            }
-//            val intent = Intent("START_WEB_SERVICE")
-//            context?.sendBroadcast(intent)
+
+            val intent = Intent("START_WEB_SERVICE")
+            context?.sendBroadcast(intent)
         } else {
             try {
                 obj.put("success", true)
@@ -59,13 +56,8 @@ object ApiHandler {
                 e.printStackTrace()
             }
 
-            context?.let {
-                val intent = Intent("STOP_WEB_SERVICE")
-                LocalBroadcastManager.getInstance(it).sendBroadcast(intent)
-            }
-
-//            val intent = Intent("STOP_WEB_SERVICE")
-//            context?.sendBroadcast(intent)
+            val intent = Intent("STOP_WEB_SERVICE")
+            context?.sendBroadcast(intent)
         } else {
             try {
                 obj.put("success", false)

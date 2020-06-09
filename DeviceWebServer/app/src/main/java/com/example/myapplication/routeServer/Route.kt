@@ -20,9 +20,9 @@ class Route : RouterNanoHTTPD {
         // todo fill in the routes
         addRoute("/", IndexHandler::class.java)
         addRoute("/test", ResponseManager::class.java)
-        addRoute("/start", ResponseManager::class.java)
-        addRoute("/stop", ResponseManager::class.java)
-        addRoute("/isActive", ResponseManager::class.java)
+        addRoute(ApiUri.START, ResponseManager::class.java)
+        addRoute(ApiUri.STOP, ResponseManager::class.java)
+        addRoute(ApiUri.IS_ACTIVE, ResponseManager::class.java)
 
     }
 }
