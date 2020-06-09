@@ -8,7 +8,9 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_server.*
@@ -24,13 +26,12 @@ class ServerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_server)
 
         initBroadcastReceiverNetworkStateChanged()
-        ApiHandler.init(this)
+//        ApiHandler.init(this)
 
         val filter = IntentFilter()
         filter.addAction("START_WEB_SERVICE")
         filter.addAction("STOP_WEB_SERVICE")
-        val myReceiver = MyReceiver()
-        registerReceiver(myReceiver, filter)
+        LocalBroadcastManager.getInstance(this).registerReceiver(apiReceiver, filter)
 
         server_on_off_btn.setOnClickListener {
             if (isConnectedInWifi()) {
@@ -121,4 +122,16 @@ class ServerActivity : AppCompatActivity() {
         server_on_off_btn.isChecked = false
         server_url_txt.text = "NONE"
     }
+
+
+    private val apiReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action == "START_WEB_SERVICE") {
+                Toast.makeText(context, "START_WEB_SERVICE", Toast.LENGTH_LONG).show()
+            } else if (intent.action == "STOP_WEB_SERVICE") {
+                stopServer()
+            }
+        }
+    }
+
 }

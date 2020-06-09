@@ -49,14 +49,14 @@
 
         <service android:name=".routeServer.MyService" />
 
-        <receiver
-            android:name=".routeServer.MyReceiver"
-            tools:ignore="ExportedReceiver">
-            <intent-filter>
-                <action android:name="START_WEB_SERVICE" />
-                <action android:name="STOP_WEB_SERVICE" />
-            </intent-filter>
-        </receiver>
+<!--        <receiver-->
+<!--            android:name=".routeServer.MyReceiver"-->
+<!--            tools:ignore="ExportedReceiver">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="START_WEB_SERVICE" />-->
+<!--                <action android:name="STOP_WEB_SERVICE" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
     </application>
 
 </manifest>

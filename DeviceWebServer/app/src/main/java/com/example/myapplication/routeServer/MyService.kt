@@ -23,6 +23,7 @@ class MyService : Service() {
         val port = intent?.getIntExtra("port", 0);
         webServer = port?.let { Route(it) }
         webServer?.start()
+        ApiHandler.init(this)
 
         startForeground(1, makeNotification(this))
         return START_STICKY
