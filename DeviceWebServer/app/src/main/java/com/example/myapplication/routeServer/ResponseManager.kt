@@ -45,10 +45,15 @@ class ResponseManager : RouterNanoHTTPD.DefaultHandler() {
                     isReader.read(charArray)
                     //Converting character array to a String
                     val contents = String(charArray)
-                    val jsonObject = Gson().fromJson(contents, TestModel::class.java)
                     Log.i("data", contents)
-                    Log.i("data", jsonObject.name)
+                    val jsonObject = Gson().fromJson(contents, TestModel::class.java)
                     return getJSONResponse(jsonObject)
+
+//                    return NanoHTTPD.newFixedLengthResponse(
+//                        status,
+//                        "application/json",
+//                        contents
+//                    )
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }

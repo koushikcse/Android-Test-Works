@@ -1,6 +1,7 @@
 package com.example.myapplication.routeServer
 
 import android.app.ActivityManager
+import android.app.ProgressDialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -15,11 +16,16 @@ import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_server.*
 
+
 class ServerActivity : AppCompatActivity() {
     private var broadcastReceiverNetworkState: BroadcastReceiver? = null
     private var host: String? = null
     private var isStarted = false
     private val port = 8080
+
+
+    var progressDoalog: ProgressDialog? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +33,7 @@ class ServerActivity : AppCompatActivity() {
 
         initBroadcastReceiverNetworkStateChanged()
 //        ApiHandler.init(this)
-
+        setprogress()
         val filter = IntentFilter()
         filter.addAction("START_WEB_SERVICE")
         filter.addAction("STOP_WEB_SERVICE")
@@ -48,6 +54,15 @@ class ServerActivity : AppCompatActivity() {
                 ).show();
             }
         }
+    }
+
+    private fun setprogress() {
+        progressDoalog = ProgressDialog(this)
+        progressDoalog?.setMax(100);
+        progressDoalog?.setCancelable(false);
+        progressDoalog?.setMessage("Its syncing....");
+        progressDoalog?.setTitle("");
+        progressDoalog?.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 
     private fun startService() {
@@ -121,6 +136,8 @@ class ServerActivity : AppCompatActivity() {
         stopService(Intent(this, MyService::class.java))
         server_on_off_btn.isChecked = false
         server_url_txt.text = "NONE"
+        if (progressDoalog != null && progressDoalog!!.isShowing)
+            progressDoalog!!.dismiss()
     }
 
 
@@ -128,6 +145,8 @@ class ServerActivity : AppCompatActivity() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == "START_WEB_SERVICE") {
                 Toast.makeText(context, "START_WEB_SERVICE", Toast.LENGTH_LONG).show()
+                if (progressDoalog != null && !progressDoalog!!.isShowing)
+                    progressDoalog!!.show();
             } else if (intent.action == "STOP_WEB_SERVICE") {
                 stopServer()
             }
