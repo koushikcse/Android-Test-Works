@@ -1,3 +1,3 @@
 package com.example.myapplication.routeServer
 
-data class TestModel(val name: String)
+data class TestModel(val id: Int = 0, val name: String = "", val uri: String = "")

@@ -33,6 +33,7 @@ class ServerActivity : AppCompatActivity() {
 
         initBroadcastReceiverNetworkStateChanged()
 //        ApiHandler.init(this)
+        ContextProvider.setContext(this)
         setprogress()
         val filter = IntentFilter()
         filter.addAction("START_WEB_SERVICE")

@@ -4,39 +4,22 @@
     package="com.example.myapplication">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".dummy.MainActivity">
-            <intent-filter>
-                <!--                <action android:name="android.intent.action.MAIN" />-->
-                <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 
-                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
-                <action android:name="android.net.wifi.STATE_CHANGE" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".server.ServerActivity">
-            <intent-filter>
-                <!--                <action android:name="android.intent.action.MAIN" />-->
-                <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-
-                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
-                <action android:name="android.net.wifi.STATE_CHANGE" />
-            </intent-filter>
-        </activity>
         <activity android:name=".routeServer.ServerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,14 +32,6 @@
 
         <service android:name=".routeServer.MyService" />
 
-<!--        <receiver-->
-<!--            android:name=".routeServer.MyReceiver"-->
-<!--            tools:ignore="ExportedReceiver">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="START_WEB_SERVICE" />-->
-<!--                <action android:name="STOP_WEB_SERVICE" />-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
     </application>
 
 </manifest>
