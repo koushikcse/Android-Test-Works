@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:fitsSystemWindows="true"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="MainActivity" />
+
+        <LinearLayout
+            android:id="@+id/top_layout"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/normal_view"
+                style="@style/cus_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="normal" />
+
+            <Button
+                android:id="@+id/satellite_view"
+                style="@style/cus_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="satellite" />
+
+            <Button
+                android:id="@+id/hybrid_view"
+                style="@style/cus_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hybrid" />
+
+            <Button
+                android:id="@+id/terrain_view"
+                style="@style/cus_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="terrain" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/search"
+            android:layout_below="@+id/top_layout"
+            style="@style/cus_button"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_height="wrap_content"
+            android:text="search place" />
+
+        <Button
+            android:id="@+id/list_btn"
+            android:layout_below="@+id/top_layout"
+            style="@style/cus_button"
+            android:layout_width="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"
+            android:text="See all" />
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="50dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/circle_btn"
+                style="@style/cus_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="circle" />
+
+            <Button
+                android:id="@+id/polyline_btn"
+                style="@style/cus_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="polyline" />
+
+            <Button
+                android:id="@+id/polygon_btn"
+                style="@style/cus_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="polygon" />
+
+            <Button
+                android:id="@+id/clean_btn"
+                style="@style/cus_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clean" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
+
+

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MapDemo</string>
+    <string name="google_map_key">please add your map key</string>
+</resources>
