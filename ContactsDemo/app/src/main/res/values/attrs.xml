@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ContactPicker">
+        <attr name="cp_showEmail" format="boolean" />
+        <attr name="cp_showPhoneNo" format="boolean" />
+
+    </declare-styleable>
+
+</resources>
