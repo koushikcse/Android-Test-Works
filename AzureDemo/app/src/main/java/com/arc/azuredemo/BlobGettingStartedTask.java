@@ -48,9 +48,11 @@ public class BlobGettingStartedTask extends AsyncTask<String, Void, Void> {
         println("BlobBasics");
 
         try {
+        //azure key = DefaultEndpointsProtocol=https;AccountName=storagecreateon23;AccountKey=Nf7aPs73IVKRFdhB/PDXJ7P0yyE0ig0W+Wka/lpuUM6hkpUjW6EP1NxqE78G/V5flxWJ90ZVMzj9+ASt918YYg==;EndpointSuffix=core.windows.net
+        
             // Setup the cloud storage account.
             CloudStorageAccount account = CloudStorageAccount
-                    .parse("DefaultEndpointsProtocol=https;AccountName=storagecreateon23;AccountKey=Nf7aPs73IVKRFdhB/PDXJ7P0yyE0ig0W+Wka/lpuUM6hkpUjW6EP1NxqE78G/V5flxWJ90ZVMzj9+ASt918YYg==;EndpointSuffix=core.windows.net");
+                    .parse("azure key");
 
             // Create a blob service client
             CloudBlobClient blobClient = account.createCloudBlobClient();

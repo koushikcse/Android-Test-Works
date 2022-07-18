@@ -28,8 +28,9 @@ object AzureUtils {
     fun init(): CloudStorageAccount? {
 
         try {
+        /*azure key = DefaultEndpointsProtocol=https;AccountName=arcdemostore;AccountKey=2mui3wrYDjXx4rUhQN/Dx5axmmbmyYu8HgClYv/Ihxox+ggaxeFmX/rkiC8FXaDlDl2vHWc9NyPDAiBroqAWjw==;EndpointSuffix=core.windows.net*/
             account =
-                CloudStorageAccount.parse("DefaultEndpointsProtocol=https;AccountName=arcdemostore;AccountKey=2mui3wrYDjXx4rUhQN/Dx5axmmbmyYu8HgClYv/Ihxox+ggaxeFmX/rkiC8FXaDlDl2vHWc9NyPDAiBroqAWjw==;EndpointSuffix=core.windows.net")
+                CloudStorageAccount.parse("azure key")
         } catch (e: Exception) {
         }
         account?.let { getContainerWithPermission(it) }
